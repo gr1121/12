@@ -1,0 +1,444 @@
+<!DOCTYPE HTML>
+<html style="font-size: 50px;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/myui.css" />
+</head>
+<body style="background-image:url('../image/bb.jpg');">
+
+  <div class="" style="background:#000;padding:5px;color:#F00;filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;height:100vh;width:100%">
+  
+   <div class="sp-content" >
+
+   
+  
+    <div class="rule">
+    		<h3 style="color:#aaa;">
+    		
+    			=====推广小技巧=====
+    		
+    		</h3>
+    		<ul style="margin-top:10px;">
+    			<p style="color:#aaa;">在本页面复制邀请链接或保存二维码发送给微信或QQ好友</p>
+    		<p style="color:#aaa;">好友下载绑定您的邀请码后您将获得对应积分好友消费您将获得佣金</p>
+    			<p style="color:#aaa;">在获取积分后您可以在APP积分页面兑换影视全网VIP</p>
+    		</ul>
+			<h3 style="color:#aaa;">
+    		
+    			=====推广福利=====  
+    		
+    		</h3>
+			
+			<ul  style="text-align: center;margin-top:10px;">
+				<li>成功推广1人，免费获取1天VIP<em id="yi">（领取）</em></li>
+				<li>成功推广3人，免费获取5天VIP<em id="er">（领取）</em></li>
+				<li>成功推广8人，免费获取15天VIP<em id="san">（领取）</em></li>
+				<li>成功推广15人，免费获取1月VIP<em id="si">（领取）</em></li>
+			</ul>
+			
+			<p>注：充值会员本来就无限观看，以上福利只是针对非会员的用户</p>
+			
+			
+			
+			<span>&nbsp;</span>
+			
+			 <div class="bigImg">
+      <div class="getVip">
+    
+        <button onclick="copySet()" style="background:#F683A2;">复制推广链接</button>
+      </div>
+	  
+	  <div class="getVip">
+    
+        <button onclick="erweima()" style="background:#F683A2;">推广二维码</button>
+      </div>
+    </div>
+    	</div>
+		
+		
+		
+  </div>
+  
+  
+    
+  </div>
+ 
+
+</body>
+<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript">
+  var api_url = localStorage.getItem('api_url');
+  var copy = '';
+  var shama = '';
+
+  apiready = function(){
+
+
+	
+		
+		
+		api.addEventListener({
+          name: 'newLoingdata'
+      }, function(ret, err) {
+        if (ret) {
+
+			huiyuan();
+          location.reload();
+        }
+      });
+huiyuan();
+  
+  }
+
+  function huiyuan(){
+  
+		var tuan2 = localStorage.getItem('tuan2');
+		//alert(tuan2)
+		var yi1 = localStorage.getItem('yi1');
+		var yi2 = localStorage.getItem('yi2');
+		var yi3 = localStorage.getItem('yi3');
+		var yi4 = localStorage.getItem('yi4');
+		//alert(yi1)
+		if(yi1==0){
+			if(tuan2>=1){
+			 var yi = $api.byId('yi');
+				yi.innerHTML = "<em style='color:red;'  onclick=\"lingyia()\">(领取)</em>";
+			 }else if(tuan2 < 1){
+			 var yi = $api.byId('yi');
+				yi.innerHTML = '(未完成)';
+			 }else{
+			 var yi = $api.byId('yi');
+				yi.innerHTML = '(完成)';
+			 }
+		}else{
+		 var yi = $api.byId('yi');
+				yi.innerHTML = '(完成)';
+		}
+		
+		if(yi2==0){
+			if(tuan2>=5){
+			 var er = $api.byId('er');
+				er.innerHTML = "<em style='color:red;'  onclick=\"lingyi2a()\">(领取)</em>";
+			 }else if(tuan2 < 5){
+			 var er = $api.byId('er');
+				er.innerHTML = '(未完成)';
+			 }else{
+			 var er = $api.byId('er');
+				er.innerHTML = '(完成)';
+			 }
+		
+		}else{
+		var er = $api.byId('er');
+				er.innerHTML = '(完成)';
+		}
+		
+		if(yi3==0){
+		
+			if(tuan2>=15){
+			 var san = $api.byId('san');
+				san.innerHTML = "<em style='color:red;'  onclick=\"lingyi3a()\">(领取)</em>";
+			 }else if(tuan2 < 15){
+			 var san = $api.byId('san');
+				san.innerHTML = '(未完成)';
+			 }else{
+			 var san = $api.byId('san');
+				san.innerHTML = '(完成)';
+			 }
+		
+		
+		}else{
+		var san = $api.byId('san');
+				san.innerHTML = '(完成)';
+		}
+		
+		if(yi4==0){
+			if(tuan2>=20){
+			 var si = $api.byId('si');
+				si.innerHTML = "<em style='color:red;'  onclick=\"lingyi4a()\">(领取)</em>";
+			 }else if(tuan2 < 20){
+			 var si = $api.byId('si');
+				si.innerHTML = '(未完成)';
+			 }else{
+			 var si = $api.byId('si');
+				si.innerHTML = '(完成)';
+			 }
+		
+		}else{
+		var si = $api.byId('si');
+				si.innerHTML = '(完成)';
+		}
+  }
+  
+  function lingyia(){
+  
+	   api.ajax({
+		  url: api_url+'/App/Index/lingyia.html',
+		  method: 'get',
+			data: {
+				values: {
+					uid: localStorage.getItem('user_id'),
+				   }
+				}
+	  },function(ret, err){
+		  if (ret.code==1) {
+		 
+			getTime();
+			 api.toast({
+					  msg: '(ｷ｀ﾟДﾟ´)!! 领取成功',
+					  duration: 2000
+				  });
+		  }else{
+		  
+			alert('错误')
+		  }        
+	   });
+
+  }
+  
+  
+  function lingyi2a(){
+  
+	   api.ajax({
+		  url: api_url+'/App/Index/linger.html',
+		  method: 'get',
+			data: {
+				values: {
+					uid: localStorage.getItem('user_id'),
+				   }
+				}
+	  },function(ret, err){
+		  if (ret.code==1) {
+		 
+			getTime();
+			 api.toast({
+					  msg: '(ｷ｀ﾟДﾟ´)!! 领取成功',
+					  duration: 2000
+				  });
+		  }else{
+		  
+			alert('错误')
+		  }        
+	   });
+
+  }
+  
+  function lingyi3a(){
+  
+	   api.ajax({
+		  url: api_url+'/App/Index/lingsan.html',
+		  method: 'get',
+			data: {
+				values: {
+					uid: localStorage.getItem('user_id'),
+				   }
+				}
+	  },function(ret, err){
+		  if (ret.code==1) {
+		 
+			getTime();
+			 api.toast({
+					  msg: '(ｷ｀ﾟДﾟ´)!! 领取成功',
+					  duration: 2000
+				  });
+		  }else{
+		  
+			alert('错误')
+		  }        
+	   });
+
+  }
+  
+  function lingyi4a(){
+  
+	   api.ajax({
+		  url: api_url+'/App/Index/lingsi.html',
+		  method: 'get',
+			data: {
+				values: {
+					uid: localStorage.getItem('user_id'),
+				   }
+				}
+	  },function(ret, err){
+		  if (ret.code==1) {
+		 
+			getTime();
+			 api.toast({
+					  msg: '(ｷ｀ﾟДﾟ´)!! 领取成功',
+					  duration: 2000
+				  });
+		  }else{
+		  
+			alert('错误')
+		  }        
+	   });
+
+  }
+  
+  
+  
+  
+   function getTime(){
+    api.ajax({
+        url: api_url+'/App/Index/shuaxin.html',
+        method: 'get',
+        data: {
+            values: {
+                uid: localStorage.getItem('user_id'),
+               
+            }
+        }
+    },function(ret, err){
+        if (ret) {
+         
+              localStorage.setItem('viptime',ret.viptime);
+			  localStorage.setItem('yi1',ret.yi1);
+			  localStorage.setItem('yi2',ret.yi2);
+			  localStorage.setItem('yi3',ret.yi3);
+			  localStorage.setItem('yi4',ret.yi4);
+              api.sendEvent({
+                name: 'newLoingdata',
+                extra: {
+                }
+              });
+          
+        } else {
+          api.hideProgress();
+          alert('网络错误！');
+        }
+    });
+  } 
+
+ function erweima(){
+ api.showProgress({
+        title: '加载中...',
+        text: '请稍等...',
+        modal: false
+    });
+		
+  api.ajax({
+        url: api_url+'/App/Index/config.html',
+        method: 'get'
+    },function(ret, err){
+		if (ret) {
+				var dialogBox = api.require('dialogBox');
+				dialogBox.webView({
+					tapClose: false,
+					path: 'http://qr.topscan.com/api.php?&text='+ret.xiazai,
+					texts: {
+						title: '下载二维码',
+						leftBtnTitle: '关闭',
+						rightBtnTitle: '分享'
+					},
+					styles: {
+						bg: '#fff',
+						corner: 5,
+						w: 300,
+						h: 380,
+						title: {
+							h: 44,
+							size: 14,
+							color: '#000'
+						},
+						upDividingLine: {
+							width: 0.2,
+							color: '#696969'
+						},
+						webView: {
+							h: 300,
+							bg: '#fff',
+						},
+						downDividingLine: {
+							width: 0.2,
+							color: '#696969'
+						},
+						left: {
+							bg: 'rgba(0,0,0,0)',
+							color: '#007FFF',
+							size: 12
+						},
+						right: {
+							bg: 'rgba(0,0,0,0)',
+							color: '#007FFF',
+							size: 12
+						}
+					}
+				}, function(ret) {
+					if (ret.eventType == 'left') {
+						var dialogBox = api.require('dialogBox');
+						dialogBox.close({
+							dialogName: 'webView'
+						});
+					}else {
+
+					  alert('请截屏后分享');
+					}
+				});
+				
+			api.hideProgress();
+		} 
+	});
+  }
+  
+//////////二维码 //////////
+
+
+
+//////////复制分享链接 //////////
+  function copySet(){
+  api.showProgress({
+        title: '加载中...',
+        text: '请稍等...',
+        modal: false
+    });
+    api.ajax({
+        url: api_url+'/App/Index/config.html',
+        method: 'get'
+    },function(ret, err){
+
+
+		if (ret) {
+		
+			var id = localStorage.getItem('user_id');
+			var clipBoard = api.require('clipBoard');
+		  clipBoard.set({
+			  value: '【万达视频】全网VIP视频免费看，高清无广告，再也不用充值会员啦！记得绑定我的邀请：'+ id +'  免费领会员！APP下载地址：'+ret.xiazai
+		  }, function(ret, err) {
+			  if (ret) {
+				api.toast({
+					msg: '已复制到剪切板',
+					duration: 2000
+				});
+  
+			  } else {
+
+			  }
+		  });
+		   api.hideProgress();
+		} 
+    });
+
+
+  }
+//////////复制分享链接 //////////
+
+
+
+  function openWin(name){
+        var delay = 0;
+        if(api.systemType != 'ios'){
+            delay = 300;
+        }
+        api.openWin({
+            name: ''+name+'',
+            url: ''+name+'.html',
+            bounces:false,
+            delay: delay,
+            slidBackEnabled:true,
+            vScrollBarEnabled:false
+        });
+    }
+</script>
+</html>
